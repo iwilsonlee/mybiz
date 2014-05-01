@@ -1,0 +1,25 @@
+{
+  "name": "wj-biz",
+  "version": "0.0.1",
+  "private": true,
+  "description": "A beautiful & useful ec system using Node.js.",
+  "author": {
+    "name": "Wilson",
+    "url": "http://wj.520608.com"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.4.8",
+    "ejs": "*",
+    "marked": "~0.3.0",
+    "mongodb": "~1.3.23",
+    "connect-mongo": "~0.4.0",
+    "connect-flash": "~0.1.1",
+    "validator": "*",
+    "formidable": "*",
+    "node-smple-cache": "0.0.0",
+    "express-group-handlers": "~0.1.1"
+  }
+}

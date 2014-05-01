@@ -1,0 +1,23 @@
+<%- include header.html %>
+    
+
+<form method="post">
+    <p>商户帐号信息</p>
+    <p>商户名称：<%= merchant.name %></p>
+    <p>商户帐号：<%= merchant.username %></p>
+    <p>商户密码：<input class="text-input small-input" placeholder="密码不修改请不要输入" type="text" name="password"/></p>
+    <p>email：<input class="text-input small-input" placeholder="email" type="text" name="email" value="<%= merchant.email %>"/></p>
+    <p>电话：<input class="text-input small-input" placeholder="电话" type="text" name="phone" value="<%= merchant.phone %>"/></p>
+    <p>地址：<input class="text-input small-input" placeholder="地址" type="text" name="address" value="<%= merchant.address %>"/></p>
+    <p>商户网站信息</p>
+    <p>网站名称：<input class="text-input small-input" placeholder="网站名称" type="text" name="sitename" value="<%= siteinfo.name %>"/></p>
+    <p>网站标题：<input class="text-input small-input" placeholder="网站标题" type="text" name="title" value="<%= siteinfo.title %>"/></p>
+    <p>关键字：<input class="text-input small-input" placeholder="关键字" type="text" name="keywords" value="<%= siteinfo.keywords %>"/></p>
+    <p>网站描述：<input class="text-input small-input" placeholder="网站描述" type="text" name="description" value="<%= siteinfo.description %>"/></p>
+    <p>网站地址：<input class="text-input small-input" placeholder="网站地址" type="text" name="url" value="<%= siteinfo.url %>"/></p>
+    <p>网站模板：<input class="text-input small-input" placeholder="网站模板" type="text" name="template" value="1"/></p>
+    <input class="button" type="submit" value="修改商户!" />
+</form>
+
+
+<%- include footer.html %>

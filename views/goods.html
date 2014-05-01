@@ -1,0 +1,35 @@
+<%-include include_header.html%>
+<%-include include_banner.html%>
+
+	<section class="body_main">
+        <%-include include_nav.html%>
+		<div class="trip">
+			<div class="main">
+				<div class="tt">品类</div>
+				<div class="tc">
+                    <%
+                    allGoods.forEach(function(goods){%>
+					<div class="pro">
+						<div class="proimg"><a href="/show/<%=goods.gid%>"><img style="width:94px;height:132;" src="/images/goods/<%=goods.img%>"></a></div>
+						<div class="proname"><a href="/show/<%=goods.gid%>"><%=goods.name%></a></div>
+					</div>
+                    <%})%>
+				</div>
+
+                <a href="/cpanel/goods/1" title="First Page">&laquo; 第一页</a>
+                <%if(previous_page!=0){%>
+                <a href="/cpanel/goods/<%=previous_page%>" title="Previous Page">&laquo; 上一页</a>
+                <%}%>
+                <%if(current_page != last_page){%>
+                <a href="/cpanel/goods/<%=next_page%>" title="Next Page">下一页 &raquo;</a>
+                <%}%>
+                <a href="/cpanel/goods/<%=last_page%>" title="Last Page">最后页 &raquo;</a>
+			</div>
+
+
+
+		</div>
+
+
+	</section>
+    <%-include include_footer.html%>

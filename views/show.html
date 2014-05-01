@@ -1,0 +1,32 @@
+<%-include include_header.html%>
+<%-include include_banner.html%>
+
+	<section class="body_main">
+        <%-include include_nav.html%>
+		<div class="trip">
+			<div class="main">
+				<div class="tt"><%=goods.name%></div>
+				<div class="tc">
+					<div class="trip">
+						<div class="leftimg"><img width="142px" height="143px" src="/images/goods/<%=goods.img%>"><br><a href="/images/goods/<%=goods.img1%>" target="_blank">点击查看大图</a></div>
+						<div class="dire">
+							<b>详细信息：</b><br>
+                            <%=goods.description%><br>
+						</div>
+					</div>
+					<!--<div class="trip price">-->
+						<!--<div class="p_left">售价：<span>￥512元</span>规格型号：斤</div>-->
+						<!--<div class="p_cm"><a href="#"><img src="images/buy.png"></a><a href="#"><img src="images/cerr.png"></a></div>-->
+					<!--</div>-->
+					<div class="trip">
+						<b>阿伟小贴士：</b><br>
+						<!--◎ 海米本身就是很鲜的食材，做这道菜时也可以省略鸡精不放。<br>-->
+						<!--◎ 购买海米后，可以放入冰箱冷藏保存，要注意保持干燥，可以存放比较久的时间。如果不慎长虫发霉，就一定不能食用了。<br>-->
+						<!--◎ 泡发海米时，可以先用温水将海米洗净，然后用温水浸泡1-2小时，泡软后就可以使用了。也可以用凉水稍微泡一下，然后放入蒸锅里蒸软<br>-->
+						<img src="/images/goods/<%=goods.img1%>" width="100%">
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+    <%-include include_footer.html%>
