@@ -7,9 +7,9 @@
 			<div class="main">
 				<div class="tt">联系我们</div>
 				<div class="tc">
-					<p>地址：中国·广西-玉林市-玉州区大新里北53号</p>
-					<p>电话：0775-2305066 传真：0775-2305066</p>
-					<p>24小时热线：(0)15108000515</p>
+					<p>地址：<%=myMerchant.address%></p>
+					<p>电话：<%=myMerchant.phone%> <%if(myMerchant && myMerchant.fax){%>传真：<%=myMerchant.fax%><%}%></p>
+					<p>24小时热线：<%=myMerchant.mobile%></p>
 				</div>
 			</div>
 		</div>

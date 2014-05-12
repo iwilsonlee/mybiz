@@ -125,28 +125,33 @@ app.beforeEach(grouphandler, function(app){
 function grouphandler(req, res, next){
 //    var hostname = 'wj.520608.com';//URL.parse(req.url).hostname;
     var hostname = req.host;
-    var data = cache.get(hostname);
+    var musername = '';
+    if(hostname){
+        musername = hostname.substr(0,hostname.indexOf('.'));
+    }
+    var data = cache.get(musername);
 
     if(!data){
-        MerchantSite.getByUrl(hostname, function(err, siteinfo){
+        Merchant.getByUsername(musername, function(err, merchant){
             if(err){
                 var error = '数据错误，或者此域名不存在！'
                 res.locals.message = '<div class="alert alert-error">' + error + '</div>';
                 next();
             }
-            if(siteinfo){
-                var mySiteinfo = new MerchantSite(siteinfo);
-                Merchant.getByMid(mySiteinfo.mid, function(err, merchant){
+            if(merchant){
+//                var mySiteinfo = new MerchantSite(siteinfo);
+                MerchantSite.getByMid(merchant.mid, function(err, siteinfo){
                     if(err){
                         var error = '数据错误，或者此商户不存在！'
                         res.locals.message = '<div class="alert alert-error">' + error + '</div>';
                         next();
                     }
-                    if(merchant){
-                        var arr = [mySiteinfo,merchant];
-                        cache.set(hostname, arr, 1000 * 60 * 30);
+                    if(siteinfo){
+                        var arr = [siteinfo,merchant];
+                        cache.set(musername, arr, 1000 * 60 * 30);
                         res.locals.mySite = arr[0];
                         res.locals.myMerchant = arr[1];
+                        res.locals.title = arr[0].title;
                         next();
                     }else{
                         res.send('此域名不存在！');
@@ -161,6 +166,7 @@ function grouphandler(req, res, next){
     }else{
         res.locals.mySite = data[0];
         res.locals.myMerchant = data[1];
+        res.locals.title = data[0].title;
         next();
     }
 

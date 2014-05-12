@@ -6,10 +6,13 @@ function Merchant(merchant) {
     this.password = merchant.password;
     this.email = merchant.email,
     this.phone = merchant.phone,
+    this.mobile = merchant.mobile,
+    this.fax = merchant.fax,
     this.address = merchant.address,
     this.createTime = merchant.createTime,
     this.modifyTime = merchant.modifyTime,
     this.permission = merchant.permission,
+    this.salesInfo = merchant.salesInfo,
     this.mid = merchant.mid
 };
 
@@ -27,10 +30,13 @@ Merchant.prototype.save = function(callback){
         password: this.password,
         email: this.email,
         phone: this.phone,
+        mobile: this.mobile,
+        fax:this.fax,
         address: this.address,
         createTime : this.createTime,
         modifyTime:this.modifyTime,
         permission:this.permission,
+        salesInfo:this.salesInfo,
         mid:this.mid
     };
     mongo(function (err, db){
@@ -66,10 +72,13 @@ Merchant.prototype.update = function (callback) {
         password: this.password,
         email: this.email,
         phone: this.phone,
+        mobile: this.mobile,
+        fax:this.fax,
         address: this.address,
         createTime : this.createTime,
         modifyTime:this.modifyTime,
         permission:this.permission,
+        salesInfo:this.salesInfo,
         mid:this.mid
     };
     mongo(function (err, db) {

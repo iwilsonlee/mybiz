@@ -1,0 +1,9 @@
+<%
+allGoods.forEach(function(goods){%>
+<div class="pro">
+    <div class="proimg"><a href="/goods/show/<%=goods.gid%>"><img style="width:94px;height:132;" src="/images/goods/<%=goods.img%>"></a></div>
+    <div class="proname"><a href="/goods/show/<%=goods.gid%>"><%=goods.name%></a></div>
+    <input type="hidden" id="next_page" value="<%=next_page%>">
+    <script>page = <%=next_page%>;</script>
+</div>
+<%})%>

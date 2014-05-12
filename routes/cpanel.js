@@ -149,6 +149,11 @@ module.exports = function(app){
             res.redirect('/cpanel/merchants/1');
             return;
         }
+        if(!validator.isNumeric(req.body.mobile.trim())){
+            req.flash('error', '请输入正确的手机号码格式');
+            res.redirect('/cpanel/merchants/1');
+            return;
+        }
 
         if(!validator.isURL(req.body.url.trim())){
             req.flash('error', '请输入正确的url格式');
@@ -164,11 +169,14 @@ module.exports = function(app){
             password: password_md5,
             email: req.body.email,
             phone: req.body.phone,
+            mobile: req.body.mobile,
+            fax:req.body.fax,
             address: req.body.address,
             createTime: new Date(),
             modifyTime:null,
             address: req.body.address,
-            permission: Merchant.makePermission().normal
+            permission: Merchant.makePermission().normal,
+            salesInfo:req.body.salesInfo
         };
         var siteinfo = {
             name: req.body.sitename,
@@ -260,6 +268,12 @@ module.exports = function(app){
             return;
         }
 
+        if(!validator.isNumeric(req.body.mobile.trim())){
+            req.flash('error', '请输入正确的手机号码格式');
+            res.redirect('/cpanel/merchants/1');
+            return;
+        }
+
         if(!validator.isURL(req.body.url.trim())){
             req.flash('error', '请输入正确的url格式');
             res.redirect('/cpanel/merchants/1');
@@ -276,8 +290,11 @@ module.exports = function(app){
             doc.password = password_md5;
             doc.email = req.body.email;
             doc.phone = req.body.phone;
+            doc.mobile = req.body.mobile;
+            doc.fax = req.body.fax;
             doc.address = req.body.address;
             doc.modifyTime = new Date();
+            doc.salesInfo = req.body.salesInfo;
             var merchant = new Merchant(doc);
             merchant.update(function(err, merchant){
                 if(err){
@@ -387,8 +404,10 @@ module.exports = function(app){
                 }
                 else {
                     var d = dateNum + num;
-                    var extension = path.extname(path.basename(files.img.path));
-                    var extension1 = path.extname(path.basename(files.img1.path));
+//                    var extension = path.extname(path.basename(files.img.path));
+//                    var extension1 = path.extname(path.basename(files.img1.path));
+                    var extension = files.img.name.substr(files.img.name.indexOf('.'),files.img.name.length);
+                    var extension1 = files.img1.name.substr(files.img1.name.indexOf('.'),files.img1.name.length);
                     var imgName = d + extension;
                     var img1Name = d + "a" + extension1;
 
@@ -414,6 +433,8 @@ module.exports = function(app){
                     var goodsArr = {
                         name: fields.name,
                         description: fields.description,
+                        salesInfo : fields.salesInfo,
+                        tips : fields.tips,
                         img : imgName,
                         img1 : img1Name,
                         mid : 1,
@@ -525,8 +546,8 @@ module.exports = function(app){
                             var dateNum = (new Date()).format("yyyyMMddhhmmss");
                             var d = dateNum + num;
                             if(changeImg){
-                                var extension = path.extname(path.basename(files.img.path));
-                                    //files.img.name.substr(files.img.name.indexOf('.'),files.img.name.length);
+//                                var extension = path.extname(path.basename(files.img.path));
+                                var extension = files.img.name.substr(files.img.name.indexOf('.'),files.img.name.length);
                                 if(site.imgExtension.contains(extension)){
                                     imgName = d + extension;
 
@@ -544,8 +565,8 @@ module.exports = function(app){
 
                             }
                             if(changeImg1){
-                                var extension = path.extname(path.basename(files.img.path));
-                                //files.img1.name.substr(files.img1.name.indexOf('.'),files.img1.name.length);
+//                                var extension = path.extname(path.basename(files.img1.path));
+                                var extension = files.img.name.substr(files.img1.name.indexOf('.'),files.img1.name.length);
                                 if(site.imgExtension.contains(extension)){
                                     img1Name = d + "a" + extension;
                                     fs.renameSync(files.img1.path,  site.goodsFilePath + "//" + img1Name);
@@ -572,6 +593,8 @@ module.exports = function(app){
                         var goodsArr = {
                             name: fields.name,
                             description: fields.description,
+                            salesInfo : fields.salesInfo,
+                            tips : fields.tips,
                             img : imgName,
                             img1 : img1Name,
                             mid : 1,
