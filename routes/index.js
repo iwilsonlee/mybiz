@@ -9,7 +9,7 @@ var MerchantSite = require('../models/siteinfo.js');
 var site = require('../settings.js').site;
 var URL = require('url');
 //var cache = require("node-smple-cache").createCache("LRU", 100 * 100 * 10);
-var cache = require("../models/mycache");
+var cache = require("../models/mycache").getCache;
 
 
 module.exports = function(app){

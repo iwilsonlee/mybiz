@@ -10,7 +10,7 @@ var index = require('./routes/index');
 var Merchant = require('./models/merchant.js');
 var MerchantSite = require('./models/siteinfo.js');
 var URL = require('url');
-var cache = require("./models/mycache");
+var cache = require("./models/mycache").getCache();
 
 var http = require('http');
 var path = require('path');
@@ -27,7 +27,7 @@ var app = express();
 //var app = module.exports = express.createServer();
 // all environments
 app.set('port', process.env.PORT || 3000);
-//app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'views'));
 //app.set('view engine', 'ejs');
 app.engine('.html', ejs.__express);
 app.set('view engine', 'html');
@@ -100,17 +100,12 @@ app.configure('development', function(){
 });
 
 app.configure('production', function(){
-    app.error(function(err, req, res, next) {
+    app.use(function(err, req, res, next) {
         var meta = '[' + new Date() + '] ' + req.url + '\n';
         errorLogfile.write(meta + err.stack + '\n');
         next();
     });
 });
-
-// development only
-if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
-}
 
 groupHandlers.setup(app);
 
@@ -123,8 +118,8 @@ app.beforeEach(grouphandler, function(app){
 });
 
 function grouphandler(req, res, next){
-//    var hostname = 'wj.520608.com';//URL.parse(req.url).hostname;
-    var hostname = req.host;
+    var hostname = 'wj.520608.com';//URL.parse(req.url).hostname;
+//    var hostname = req.host;
     var musername = '';
     if(hostname){
         musername = hostname.substr(0,hostname.indexOf('.'));
@@ -170,17 +165,18 @@ function grouphandler(req, res, next){
         next();
     }
 
-   // next();
+//   next();
 }
 
 
-var myserver = http.createServer(app);
+/*var myserver = http.createServer(app);
 module.exports = myserver;
 if(!module.parent){
     myserver.listen(app.get('port'), function(){
         console.log('Express server listening on port ' + app.get('port'));
     });
-}
-//http.createServer(app).listen(app.get('port'), function(){
-//  console.log('Express server listening on port ' + app.get('port'));
-//});
+}*/
+
+http.createServer(app).listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port'));
+});
